@@ -12,6 +12,8 @@
 
 ffufai is an AI-powered wrapper for the popular web fuzzer ffuf. It automatically suggests file extensions for fuzzing based on the target URL and its headers, using either OpenAI's GPT or Anthropic's Claude AI models.
 
+<center>Added support for OLLAMA & LMStudio Locally</center>
+
 </p>
 
 </div>
@@ -28,7 +30,7 @@ ffufai is an AI-powered wrapper for the popular web fuzzer ffuf. It automaticall
 
 - Python 3.6+
 - ffuf (installed and accessible in your PATH)
-- An OpenAI API key or Anthropic API key
+- An OpenAI API key, Anthropic API key, or a local Ollama / LMStudio model server
 
 ## Installation
 
@@ -91,6 +93,15 @@ ffufai accepts all the parameters that ffuf does, plus a few additional ones:
 
 - `--max-extensions`: Sets the maximum number of extensions to suggest. Default is 4.  
   Example: `ffufai --max-extensions 6 -u https://example.com/FUZZ -w wordlist.txt`
+
+- `--model-provider`: Select the AI provider. Available options are `openai`, `anthropic`, `ollama`, and `lmstudio`.  
+  Example: `ffufai --model-provider ollama --model-name llama2 -u https://example.com/FUZZ -w wordlist.txt`
+
+- `--model-name`: The model name to use for the selected provider. If omitted, ffufai uses a sensible default for each provider.
+
+- `--ollama-url`: Base URL for a local Ollama server. Default is `http://127.0.0.1:11434`.
+
+- `--lmstudio-url`: Base URL for a local LMStudio server. Default is `http://127.0.0.1:8080`.
 
 - `-u`: Specifies the target URL. This parameter is required and should include the FUZZ keyword.  
   Example: `ffufai -u https://example.com/FUZZ -w wordlist.txt`
